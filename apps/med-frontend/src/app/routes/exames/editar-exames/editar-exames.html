@@ -1,0 +1,51 @@
+<page-header />
+
+<mat-card class="m-auto col-lg-6 col-xs-12 col-sm-12 col-md-12">
+    <mat-card-header class="m-b-24" style="text-align: center;">
+      <mat-card-title>
+        Atualizar Exame do Paciente {{exame.paciente?.nome}}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+    <form class="form-field-full" [formGroup]="registerForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Laudo</mat-label>
+          <textarea matInput formControlName="laudo" required ></textarea>
+           @if (registerForm.get('laudo')?.hasError('required')) {
+            <mat-error>
+              <span>Campo obrigatório</span>
+            </mat-error>
+            }
+            @if (registerForm.get('laudo')?.hasError('minlength') || registerForm.get('laudo')?.hasError('maxlength')) {
+            <mat-error>
+              <span>Laudo deve ter entre 3 e 3000 caracteres</span>
+            </mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Detalhes</mat-label>
+          <textarea matInput formControlName="detalhes" required ></textarea>
+           @if (registerForm.get('detalhes')?.hasError('required')) {
+            <mat-error>
+              <span>Campo obrigatório</span>
+            </mat-error>
+            }
+            @if (registerForm.get('detalhes')?.hasError('minlength') || registerForm.get('detalhes')?.hasError('maxlength')) {
+
+            <mat-error>
+              <span>Detalhes deve ter entre 3 e 1000 caracteres</span>
+            </mat-error>
+            }
+        </mat-form-field>
+
+        <input type="hidden" name="usuarioId" formControlName="usuarioId" />
+        <input type="hidden" name="pacienteId" formControlName="pacienteId" />
+
+
+        <button type="button" class="w-full m-y-16" matButton="filled" (click)="atualizar()" [disabled]="registerForm.invalid">Atualizar</button>
+      </form>
+    </mat-card-content>
+</mat-card>
+
+

@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "ignoreDeprecations": "5.0",
+    "sourceMap": true,
+    "composite": true,
+    "declaration": false,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "importHelpers": true,
+    "isolatedModules": true,
+    "lib": ["es2022"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es2022",
+    "customConditions": ["@org/source"],
+    "paths": {
+      "@org/prisma-client": ["generated/prisma/client.ts"],
+      "@org/prisma": ["libs/prisma/src/index.ts"],
+      "@core": ["apps/med-frontend/src/app/core"],
+      "@core/*": ["apps/med-frontend/src/app/core/*"],
+      "@shared": ["apps/med-frontend/src/app/shared"],
+      "@shared/*": ["apps/med-frontend/src/app/shared/*"],
+      "@theme": ["apps/med-frontend/src/app/theme"],
+      "@theme/*": ["apps/med-frontend/src/app/theme/*"],
+      "@env": ["apps/med-frontend/src/environments"],
+      "@env/*": ["apps/med-frontend/src/environments/*"],
+    }
+  }
+}

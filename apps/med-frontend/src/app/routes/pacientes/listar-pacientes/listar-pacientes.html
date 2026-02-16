@@ -1,0 +1,80 @@
+<page-header />
+<mat-card>
+   <mat-card-header>
+    <mat-card-title>Pacientes</mat-card-title>
+    <mat-card-subtitle>{{dataSource.data.length}} pacientes encontrados</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions>
+    <button
+          class="m-l-8 cursor-pointer"
+          matButton="filled"
+          (click)="adicionarPaciente()"
+        >Adicionar Paciente</button>
+  </mat-card-actions>
+  <mat-card-content>
+  <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+
+        
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="endereco">
+          <th mat-header-cell *matHeaderCellDef> Endereço </th>
+          <td mat-cell *matCellDef="let element"> {{element.endereco}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tel1">
+          <th mat-header-cell *matHeaderCellDef> Telefone 1 </th>
+          <td mat-cell *matCellDef="let element"> {{element.tel1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="exames">
+          <th mat-header-cell *matHeaderCellDef> Exames </th>
+          <td mat-cell *matCellDef="let element">
+            <button class="cursor-pointer btn-info m-r-8" (click)="adicionarExame(element)" title="Adicionar Exame">
+              <mat-icon>add_circle</mat-icon>
+            </button>
+            <button class="cursor-pointer btn-info m-r-8" (click)="listarExames(element)" title="Listar exames">
+              <mat-icon>assignment</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let element">
+            <button class="cursor-pointer m-r-8 btn-info" (click)="editarPaciente(element)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button class="cursor-pointer btn-danger" (click)="excluirPaciente(element)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator 
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="trocarPagina($event)"
+      [length]="totalRegistros"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,29 @@
+button.btn-info {
+    background-color: #17a2b8;
+    color: white;
+    border-radius: 15%;
+    border-color: #17a2b8;
+
+}
+
+button.btn-info:hover {
+    background-color: #45bbce;
+    color: white;
+    border-radius: 15%;
+    border-color: #45bbce;
+}
+
+button.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border-radius: 15%;
+    border-color: #dc3545;
+
+}
+
+button.btn-danger:hover {
+    background-color: #f5707d;
+    color: white;
+    border-radius: 15%;
+    border-color: #f5707d;
+}

@@ -1,0 +1,94 @@
+<page-header />
+<mat-card class="m-auto col-lg-6 col-xs-12 col-sm-12 col-md-12">
+    <mat-card-header class="m-b-24" style="text-align: center;">
+      <mat-card-title>
+        Cadastrar Paciente
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+    <form class="form-field-full" [formGroup]="registerForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome" required />
+          @if (registerForm.get('nome')?.invalid) {
+            <mat-error>
+              <span>Campo obrigatório</span>
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" required />
+          @if (registerForm.get('email')?.hasError('required')) {
+            <mat-error>
+              <span>Email Obrigatório</span>
+            </mat-error>
+          }
+          @if( registerForm.get('email')?.hasError('email')) {
+            <mat-error>
+              <span>Email inválido</span>
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Documento</mat-label>
+          <input matInput formControlName="documento" maxlength="11" minlength="11" required />
+          @if (registerForm.get('documento')?.hasError('required')) {
+            <mat-error>
+              <span>Campo obrigatório</span>
+            </mat-error>
+          }
+          @if (registerForm.get('documento')?.hasError('maxlength') || registerForm.get('documento')?.hasError('minlength')) {
+            <mat-error>
+              <span>Campo deve ter 11 caracteres</span>
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Endereço</mat-label>
+          <input matInput formControlName="endereco" minlength="3" maxlength="191" required />
+          @if (registerForm.get('endereco')?.hasError('required')) {
+            <mat-error>
+              <span>Campo obrigatório</span>
+            </mat-error>
+          }
+          @if (registerForm.get('endereco')?.hasError('maxlength') || registerForm.get('endereco')?.hasError('minlength')) {
+            <mat-error>
+              <span>Campo deve ter no mínimo 3 caracteres</span>
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Telefone 1</mat-label>
+          <input matInput formControlName="tel1" maxlength="10" minlength="11" required />
+          @if (registerForm.get('tel1')?.hasError('required')) {
+            <mat-error>
+              <span>Campo obrigatório</span>
+            </mat-error>
+          }
+          @if (registerForm.get('tel1')?.hasError('maxlength') || registerForm.get('tel1')?.hasError('minlength')) {
+            <mat-error>
+              <span>Campo deve ter 11 caracteres</span>
+            </mat-error>
+          }
+        </mat-form-field>
+
+         <mat-form-field appearance="outline">
+          <mat-label>Telefone 2</mat-label>
+          <input matInput formControlName="tel2" maxlength="10" minlength="11" />
+          @if (registerForm.get('tel2')?.hasError('maxlength') || registerForm.get('tel2')?.hasError('minlength')) {
+            <mat-error>
+              <span>Campo deve ter 11 caracteres</span>
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <button type="button" class="w-full m-y-16" matButton="filled" (click)="atualizar()" [disabled]="registerForm.invalid">Atualizar</button>
+      </form>
+    </mat-card-content>
+</mat-card>
+

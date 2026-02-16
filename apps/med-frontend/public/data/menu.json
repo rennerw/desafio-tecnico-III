@@ -1,0 +1,83 @@
+{
+  "menu": [
+    {
+      "route": "dashboard",
+      "name": "dashboard",
+      "type": "hidden",
+      "icon": "dashboard",
+      "badge": {
+        "color": "red-50",
+        "value": "5"
+      }
+    },
+    {
+      "route": "/",
+      "name": "sessions",
+      "type": "hidden",
+      "icon": "question_answer",
+      "children": [
+        {
+          "route": "403",
+          "name": "403",
+          "type": "link"
+        },
+        {
+          "route": "404",
+          "name": "404",
+          "type": "link"
+        },
+        {
+          "route": "500",
+          "name": "500",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "pacientes",
+      "name": "pacientes",
+      "type": "sub",
+      "icon": "people",
+      "children": [
+        {
+          "route": "cadastrar",
+          "name": "cadastrar",
+          "type": "link"
+        },
+        {
+          "route": "listarPacientes",
+          "name": "listarPacientes",
+          "type": "link"
+        },
+        {
+          "route": "editarPaciente",
+          "name": "editarPaciente",
+          "type": "hidden"
+        }
+      ]
+    },
+    {
+      "route": "exames",
+      "name": "exames",
+      "type": "hidden",
+      "icon": "assignment",
+      "children": [
+        {
+          "route": "cadastrar",
+          "name": "cadastrar",
+          "type": "hidden"
+        },
+        {
+          "route": "listarExames",
+          "name": "listarExames",
+          "type": "hidden"
+        },
+        {
+          "route": "editarExame",
+          "name": "editarExame",
+          "type": "hidden"
+        }
+      ]
+    }
+  ]
+}

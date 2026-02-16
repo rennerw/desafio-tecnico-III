@@ -1,0 +1,42 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/med-backend-e2e"
+    },
+    {
+      "path": "./apps/med-backend"
+    }
+  ],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@core": [
+        "apps/med-frontend/src/app/core"
+      ],
+      "@core/*": [
+        "apps/med-frontend/src/app/core/*"
+      ],
+      "@shared": [
+        "apps/med-frontend/src/app/shared"
+      ],
+      "@shared/*": [
+        "apps/med-frontend/src/app/shared/*"
+      ],
+      "@theme": [
+        "apps/med-frontend/src/app/theme"
+      ],
+      "@theme/*": [
+        "apps/med-frontend/src/app/theme/*"
+      ],
+      "@env": [
+        "apps/med-frontend/src/environments"
+      ],
+      "@env/*": [
+        "apps/med-frontend/src/environments/*"
+      ]
+    }
+  }
+}

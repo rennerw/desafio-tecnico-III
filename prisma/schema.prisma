@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Usuario {
+  id     Int     @id @default(autoincrement())
+  email  String  @unique
+  nome   String
+  senha  String
+  // posts Post[]
+  exames Exame[]
+}
+
+model Paciente {
+  id              Int      @id @default(autoincrement())
+  nome            String
+  email           String
+  documento       String   @unique @db.VarChar(11) // cpf sem mascara
+  endereco        String
+  tel1            String   @db.VarChar(11) // telefone nacional com DDD sem mascara
+  tel2            String?  @db.VarChar(11) // telefone nacional com DDD sem mascara
+  // author    User    @relation(fields: [authorId], references: [id])
+  exames          Exame[]
+  dataCriacao     DateTime @default(now())
+  dataAtualizacao DateTime @updatedAt
+}
+
+model Exame {
+  id              Int      @id @default(autoincrement())
+  // idempotencyKey String   @unique @db.VarChar(18)
+  laudo           String   @db.Text
+  detalhes        String?  @db.Text // maquina, equipamento, versão software
+  usuarioId       Int
+  pacienteId      Int
+  usuario         Usuario  @relation(fields: [usuarioId], references: [id])
+  paciente        Paciente @relation(fields: [pacienteId], references: [id])
+  dataCriacao     DateTime @default(now())
+  dataAtualizacao DateTime @updatedAt
+}
