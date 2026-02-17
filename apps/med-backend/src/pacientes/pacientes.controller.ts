@@ -13,14 +13,17 @@ import { CreatePacienteDto } from './dto/create-paciente.dto';
 import { UpdatePacienteDto } from './dto/update-paciente.dto';
 import { ReturnMessage } from '../libs/return-message.interface';
 import { GetPacienteDto } from './dto/get-paciente.dto';
+import { validar, ErroValidacao, ErroInterno, ErroConflito } from '../libs/validar';
 
 @Controller('pacientes')
 export class PacientesController {
   constructor(private readonly pacientesService: PacientesService) { }
 
   @Post()
-  async create(@Body() createPacienteDto: CreatePacienteDto): Promise<ReturnMessage> {
+  async create(@Body() createPacienteDto: CreatePacienteDto): Promise<Error|ReturnMessage> {
+    
     try {
+      await validar(CreatePacienteDto,createPacienteDto);
       const result = await this.pacientesService.create(createPacienteDto);
       return {
         httpCode: 200,
@@ -28,14 +31,16 @@ export class PacientesController {
         message: result,
       } as ReturnMessage;
     }
-    catch (e) {
-      console.error(e);
-      return {
-        httpCode: 500,
-        status: 'error',
-        message: 'Erro ao criar paciente',
-      } as ReturnMessage;
+    catch(e: any) {
+      if(e instanceof ErroValidacao) {
+        throw new ErroValidacao(e.message); // Retorna 400
+      }
+      if(e.code === 'P2002') {
+        throw new ErroConflito('Paciente com esse CPF já existe');
+      }
+      throw new ErroInterno('Erro ao criar paciente');
     }
+    
   }
 
   @Get()
@@ -86,6 +91,7 @@ export class PacientesController {
     @Body() updatePacienteDto: UpdatePacienteDto,
   ) {
     try {
+      await validar(UpdatePacienteDto,updatePacienteDto);
       const result = await this.pacientesService.update(+id, updatePacienteDto);
       return {
         httpCode: 200,
@@ -93,13 +99,14 @@ export class PacientesController {
         message: result,
       } as ReturnMessage;
     }
-    catch (e) {
-      console.error(e);
-      return {
-        httpCode: 500,
-        status: 'error',
-        message: 'Erro ao atualizar paciente',
-      } as ReturnMessage;
+    catch(e: any) {
+      if(e instanceof ErroValidacao) {
+        throw new ErroValidacao(e.message); // Retorna 400
+      }
+      if(e.code === 'P2002') {
+        throw new ErroConflito('Paciente com esse CPF já existe');
+      }
+      throw new ErroInterno('Erro ao atualizar paciente');
     }
   }
 
